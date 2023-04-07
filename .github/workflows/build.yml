@@ -1,0 +1,36 @@
+name: "TCS CLI"
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  tcs-cli-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3.5.0
+        with:
+          fetch-depth: 0
+
+      - name: Download TCS CLI
+        run: |
+          curl --request GET --url 'https://staging.tenable.com/downloads/api/v2/pages/tenable-cs/files/tenable.cs-cli_2.1.0-ebd9e6b-preview_Linux_x86_64.tar.gz' --output 'tcs.tar.gz'
+          tar -xvf ./tcs.tar.gz tcs
+          docker images
+
+      - name: List Docker Images before
+        run: docker images
+
+      - name: Build Image
+        run: |
+          docker build -t nodejs-express:${GITHUB_SHA} .
+      
+      - name: List Docker Images after
+        run: docker images
+
+      - name: Scan Image
+        run: |
+          ./tcs scan -t=container-image --image=docker-daemon:nodejs-express:${GITHUB_SHA} --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
+          
+          

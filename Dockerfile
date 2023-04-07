@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-18-minimal:1
+FROM centos/nodejs-12-centos7
 
 WORKDIR /opt/app-root/src
 
