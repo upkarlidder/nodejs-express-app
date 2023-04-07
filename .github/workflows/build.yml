@@ -24,13 +24,13 @@ jobs:
 
       - name: Build Image
         run: |
-          docker build -t nodejs-express:${GITHUB_SHA} .
+          docker build -t nodejs-express:${{ github.sha }} .
       
       - name: List Docker Images after
         run: docker images
 
       - name: Scan Image
         run: |
-          ./tcs scan -t=container-image --image=docker-daemon:nodejs-express:${GITHUB_SHA} --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
+          ./tcs scan -t=container-image --image=docker-daemon:nodejs-express:${{ github.sha }} --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
           
           
