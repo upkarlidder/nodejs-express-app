@@ -33,4 +33,7 @@ jobs:
         run: |
           ./tcs scan -t=container-image --image=docker-daemon:nodejs-express:${{ github.sha }} --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
           
-          
+      - name: Parse JSON and report
+        run: |
+          ls -lta report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
+          jq '.images[].violations[]?.vulnerability' report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
