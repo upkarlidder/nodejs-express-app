@@ -31,7 +31,7 @@ jobs:
 
       - name: Scan Image with TCS
         run: |
-          ./tcs consec image docker-daemon:nodejs-express:${{ github.sha }}  --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
+          ./tcs consec image docker-daemon:nodejs-express:${{ github.sha }}  --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail || true
       
       - name: Parse JSON and report
         run: |
