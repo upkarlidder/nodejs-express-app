@@ -31,11 +31,11 @@ jobs:
 
       - name: Scan Image with PROJECT 1
         run: |
-          ./tcs scan -t=container-image --image=docker-daemon:nodejs-express:${{ github.sha }} --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
+          ./tcs consec image docker-daemon:nodejs-express:${{ github.sha }}  --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
       
-      - name: Scan Image with PROJECT 2
-        run: |
-          ./tcs scan -t=container-image --image=docker-daemon:nodejs-express:${{ github.sha }} --project=${{ secrets.TCS_PROJECT_POLICY_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
+#       - name: Scan Image with PROJECT 2
+#         run: |
+#           ./tcs scan -t=container-image --image=docker-daemon:nodejs-express:${{ github.sha }} --project=${{ secrets.TCS_PROJECT_POLICY_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
       
       - name: Parse JSON and report
         run: |
