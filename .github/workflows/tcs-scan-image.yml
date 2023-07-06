@@ -36,7 +36,7 @@ jobs:
       - name: Parse JSON and report
         run: |
           ls -lta report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
-          head -n 50 report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
+          cat report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
 #           jq '.images[].violations[]?.vulnerability' report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
 
 #           ls -lta report/tcs_image_scan_${{ secrets.TCS_PROJECT_POLICY_ID }}.json
