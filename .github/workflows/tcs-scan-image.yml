@@ -37,7 +37,7 @@ jobs:
         run: |
           ls -lta report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
           cat report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
-#           jq '.images[].violations[]?.vulnerability' report/tcs_image_scan_${{ secrets.TCS_PROJECT_ID }}.json
-
-#           ls -lta report/tcs_image_scan_${{ secrets.TCS_PROJECT_POLICY_ID }}.json
-#           jq '.images[].violations[]?.vulnerability' report/tcs_image_scan_${{ secrets.TCS_PROJECT_POLICY_ID }}.json
+      
+      - name: Scan Image with TCS
+        run: |
+          ./tcs consec image docker-daemon:nodejs-express:${{ github.sha }}  --project=${{ secrets.TCS_PROJECT_ID }} --token=${{ secrets.TCS_TOKEN }} --appurl=${{ secrets.TCS_APP_URL }} --wait --fail
